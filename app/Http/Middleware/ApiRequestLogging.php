@@ -23,6 +23,13 @@ class ApiRequestLogging
         return $next($request);
     }
 
+    /**
+     * Handle a response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\JsonResponse  $response
+     * @return void
+     */
     public function terminate(Request $request, JsonResponse $response)
     {
         Log::channel('single')->info('Outgoing response:');
