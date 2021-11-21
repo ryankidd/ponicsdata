@@ -18,14 +18,14 @@ class ApiRequestLogging
      */
     public function handle(Request $request, Closure $next)
     {
-        Log::info('Incoming request:');
-        Log::info($request);
+        Log::channel('single')->info('Incoming request:');
+        Log::channel('single')->info($request);
         return $next($request);
     }
 
     public function terminate(Request $request, Response $response)
     {
-        Log::info('Outgoing response:');
-        Log::info($response);
+        Log::channel('single')->info('Outgoing response:');
+        Log::channel('single')->info($response);
     }
 }
