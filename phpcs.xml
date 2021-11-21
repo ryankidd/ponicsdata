@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="Project code style checker config">
+    <rule ref="../vendor/longman/php-code-style/longish.phpcs.xml">
+    </rule>
+
+    <!-- Ban some functions -->
+    <rule ref="Generic.PHP.ForbiddenFunctions">
+        <properties>
+            <property name="forbiddenFunctions" type="array">
+                <element key="sizeof" value="count"/>
+                <element key="delete" value="unset"/>
+                <element key="print" value="echo"/>
+                <element key="create_function" value="null"/>
+            </property>
+        </properties>
+    </rule>
+
+    <rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
+        <exclude-pattern>/tests/*</exclude-pattern>
+        <exclude-pattern>/app/Models/*</exclude-pattern>
+    </rule>
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+        <exclude-pattern>/database/*</exclude-pattern>
+    </rule>
+    <rule ref="Generic.CodeAnalysis.EmptyStatement.DetectedCatch">
+        <exclude-pattern>*/*</exclude-pattern>
+    </rule>
+    <rule ref="PEAR.Functions.ValidDefaultValue.NotAtEnd">
+        <exclude-pattern>/app/Http/*</exclude-pattern>
+    </rule>
+
+    <rule ref="Squiz.Strings.DoubleQuoteUsage.NotRequired"/>
+
+    <!--
+      Ensures a file declare new symbols and causes no other side effects,
+      or executes logic with side effects, but not both.
+    -->
+    <rule ref="PSR1.Files.SideEffects"/>
+
+    <!--
+      Disallows to complex function determined by the cyclomatic complexity
+      (McCabe, http://en.wikipedia.org/wiki/Cyclomatic_complexity) of that function.
+    -->
+    <rule ref="Generic.Metrics.CyclomaticComplexity">
+        <properties>
+            <property name="complexity" value="4"/>
+            <property name="absoluteComplexity" value="5"/>
+        </properties>
+    </rule>
+
+    <!--
+      Defines a maximum $nestingLevel and $absoluteNestingLevel for functions.
+    -->
+    <rule ref="Generic.Metrics.NestingLevel">
+        <properties>
+            <property name="nestingLevel" value="2"/>
+            <property name="absoluteNestingLevel" value="7"/>
+        </properties>
+    </rule>
+
+    <!--
+      Ensures that switch statements are defined according to PSR2.
+    -->
+    <rule ref="PSR2.ControlStructures.SwitchDeclaration">
+        <properties>
+            <property name="indent" value="4"/>
+        </properties>
+    </rule>
+
+    <!--
+      Ignore errors like "Expected 1 space before "?"; newline found (Squiz.WhiteSpace.OperatorSpacing.SpacingBefore)"
+    -->
+    <rule ref="Squiz.WhiteSpace.OperatorSpacing">
+        <properties>
+            <property name="ignoreNewlines" value="true"/>
+        </properties>
+    </rule>
+
+    <!--
+      Extra rules from https://github.com/slevomat/coding-standard
+    -->
+    <config name="installed_paths" value="../../slevomat/coding-standard"/>
+    <rule ref="SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly">
+        <exclude-pattern>/app/Exceptions/Handler.php</exclude-pattern>
+    </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
+        <exclude-pattern>/database/migrations/*</exclude-pattern>
+        <exclude-pattern>/config/*</exclude-pattern>
+        <properties>
+            <property name="newlinesCountBetweenOpenTagAndDeclare" value="1"/>
+            <property name="newlinesCountAfterDeclare" value="2"/>
+            <property name="spacesCountAroundEqualsSign" value="0"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.ControlStructures.DisallowEqualOperators"></rule>
+
+    <rule ref="SlevomatCodingStandard.Functions.UnusedInheritedVariablePassedToClosure"></rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.UselessAlias"></rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses"></rule>
+    <rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma"></rule>
+    <rule ref="SlevomatCodingStandard.ControlStructures.LanguageConstructWithParentheses"></rule>
+    <rule ref="SlevomatCodingStandard.ControlStructures.NewWithParentheses"></rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses">
+        <exclude-pattern>/database/migrations/*</exclude-pattern>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.RequireOneNamespaceInFile"></rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.NamespaceSpacing">
+        <properties>
+            <property name="linesCountBeforeNamespace" value="1"/>
+            <property name="linesCountAfterNamespace" value="1"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.UseSpacing">
+        <properties>
+            <property name="linesCountBeforeFirstUse" value="1"/>
+            <property name="linesCountAfterLastUse" value="1"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints"></rule>
+    <!--<rule ref="SlevomatCodingStandard.PHP.ShortList"></rule>-->
+    <rule ref="SlevomatCodingStandard.PHP.TypeCast"></rule>
+    <rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
+        <exclude-pattern>/tests/*</exclude-pattern>
+        <properties>
+            <property name="rootNamespaces" type="array" value="app=>App"/>
+            <property name="skipDirs" type="array" value="database"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility"></rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing"></rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue"></rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHintSpacing"></rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.DisallowGroupUse"></rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash"></rule>
+    <rule ref="SlevomatCodingStandard.Types.EmptyLinesAroundTypeBraces">
+        <exclude-pattern>/database/migrations/*</exclude-pattern>
+        <properties>
+            <property name="linesCountAfterOpeningBrace" value="0"/>
+            <property name="linesCountBeforeClosingBrace" value="0"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameInAnnotation"></rule>
+    <rule ref="SlevomatCodingStandard.Commenting.ForbiddenAnnotations">
+        <properties>
+            <property name="forbiddenAnnotations" type="array" value="@author,@created,@version,@package,@copyright,@license"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Commenting.RequireOneLinePropertyDocComment"></rule>
+</ruleset>
