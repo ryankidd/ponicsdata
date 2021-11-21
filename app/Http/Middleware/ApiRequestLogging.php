@@ -30,7 +30,7 @@ class ApiRequestLogging
      * @param  \Illuminate\Http\JsonResponse  $response
      * @return void
      */
-    public function terminate(Request $request, JsonResponse $response)
+    public function terminate(Request $request, $response)
     {
         Log::channel('single')->info('Outgoing response:');
         Log::channel('single')->info($response);
