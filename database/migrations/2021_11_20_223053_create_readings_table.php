@@ -15,7 +15,6 @@ class CreateReadingsTable extends Migration
     {
         Schema::create('readings', function (Blueprint $table) {
             $table->id();
-            $table->string('device');
             $table->json('data');
             $table->timestamps();
         });
