@@ -19,29 +19,30 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Public routes
+
+// User Actions
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);  // Put behind auth.
+
+// Devices.
 Route::get('/devices', [DeviceController::class, 'index']);
 Route::get('/devices/{id}', [DeviceController::class, 'show']);
+Route::post('/devices', [DeviceController::class, 'store']); // Put behind auth.
+Route::put('/devices/{id}', [DeviceController::class, 'update']); // Put behind auth.
+Route::delete('/devices/{id}', [DeviceController::class, 'destroy']); // Put behind auth.
+
+// Readings.
 Route::get('/readings', [ReadingController::class, 'index']);
 Route::get('/readings/{id}', [ReadingController::class, 'show']);
-Route::post('/readings', [ReadingController::class, 'store']);
-Route::put('/readings/{id}', [ReadingController::class, 'update']);
-Route::delete('/readings/{id}', [ReadingController::class, 'destroy']);
+Route::put('/readings/{id}', [ReadingController::class, 'update']);  // Put behind auth.
+Route::delete('/readings/{id}', [ReadingController::class, 'destroy']);  // Put behind auth.
 
 
-// Protected routes
+// Protected routes WHEN  we can use authentication with the sensors, move API routes here.
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('/devices', [DeviceController::class, 'store']);
-    Route::put('/devices/{id}', [DeviceController::class, 'update']);
-    Route::delete('/devices/{id}', [DeviceController::class, 'destroy']);
-    Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::middleware('request.logging')->post('/hello', function() {
-    return response(['message' => 'Hi, how are you?']);
+Route::group(['middleware' => ['request.logging']], function () {
+    Route::post('/readings', [ReadingController::class, 'store']);
 });
