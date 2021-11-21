@@ -10,7 +10,6 @@ class Reading extends Model
     use HasFactory;
     protected $fillable = [
 		'data',
-		'device'
 	];
 
 	protected $casts = [
