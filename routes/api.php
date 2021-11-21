@@ -35,6 +35,7 @@ Route::get('/readings/{id}', [ReadingController::class, 'show']);
 
 /**
  * Put these routes behind auth when possible.
+ * -------------------------------------------------- ***
  */
 
 // User Actions.
@@ -49,12 +50,17 @@ Route::delete('/devices/{id}', [DeviceController::class, 'destroy']);
 Route::put('/readings/{id}', [ReadingController::class, 'update']);
 Route::delete('/readings/{id}', [ReadingController::class, 'destroy']);
 
-// TODO: TEST.  Not sure if this is the proper implementation for multiple middleware.
-Route::group(['middleware' => ['auth:sanctum', 'request.logging']], function () {
-    //  Add routes that need auth here when we have sensors capable of sending auth headers.
-});
+/**
+ * -------------------------------------------------- ***
+ */
 
-// If not...
+
+// TODO: TEST.  Not sure if this is the proper implementation for multiple middleware.
+// Route::group(['middleware' => ['auth:sanctum', 'request.logging']], function () {
+//    Add routes that need auth here when we have sensors capable of sending auth headers.
+// });
+
+// If not, we can add routes here to have them log request data.
 // Route::group(['middleware' => ['auth:sanctum']], function () {
 
 // });
