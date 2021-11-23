@@ -27,7 +27,6 @@ class DeviceController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'description' => 'required',
             'type' => 'required',
             'slug' => 'required',
         ]);

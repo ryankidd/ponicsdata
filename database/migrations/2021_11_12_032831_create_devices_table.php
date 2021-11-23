@@ -19,7 +19,7 @@ class CreateDevicesTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('description')->nullable();
-            $table->unsignedBigInteger('room_id');
+            $table->unsignedBigInteger('room_id')->nullable();
 
             $table->timestamps();
             $table->index(['id', 'room_id']);
