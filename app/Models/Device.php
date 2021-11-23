@@ -11,10 +11,17 @@ class Device extends Model
 	protected $fillable = [
 		'name',
 		'description',
-		'type',
 		'slug',
-		'purchase_date',
-		'purchase_price',
-		'webhooks',
+		'room_id',
 	];
+
+	public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
+
+	public function readings()
+    {
+        return $this->hasMany(Reading::class);
+    }
 }

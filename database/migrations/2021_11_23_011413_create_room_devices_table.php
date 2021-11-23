@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReadingsTable extends Migration
+class CreateRoomDevicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateReadingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('readings', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedInteger('device_id');
-            $table->json('data');
+        Schema::create('room_devices', function (Blueprint $table) {
+            $table->foreignId('room_id')->constrained();
+            $table->foreignId('device_id')->constrained();
             $table->timestamps();
-
-            $table->index(['device_id']);
         });
     }
 
@@ -30,6 +27,6 @@ class CreateReadingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('readings');
+        Schema::dropIfExists('room_devices');
     }
 }

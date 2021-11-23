@@ -16,12 +16,12 @@ class CreateDevicesTable extends Migration
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug')->unique();
             $table->string('description')->nullable();
-            $table->string('type');
-            $table->string('slug');
-            $table->string('purchase_date')->nullable();
-            $table->decimal('purchase_price', 5, 2)->nullable();
+            $table->unsignedInteger('room_id')->default(NULL);
             $table->timestamps();
+
+            $table->index(['room_id', 'slug']);
         });
     }
 

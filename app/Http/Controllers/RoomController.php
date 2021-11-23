@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reading;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class ReadingController extends Controller
+class RoomController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class ReadingController extends Controller
      */
     public function index()
     {
-        return Reading::find();
+        return Room::all();
     }
 
     /**
@@ -27,10 +27,10 @@ class ReadingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'device' => 'required',
-            'data' => 'required'
+            'name' => 'required',
+            'location' => 'required'
         ]);
-        return Reading::create($request->all());
+        return Room::create($request->all());
     }
 
     /**
@@ -41,7 +41,7 @@ class ReadingController extends Controller
      */
     public function show($id)
     {
-        return Reading::find($id);
+        return Room::find($id);
     }
 
     /**
@@ -53,9 +53,9 @@ class ReadingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $reading = Reading::find($id);
-        $reading->update($request->all());
-        return $reading;
+        $Room = Room::find($id);
+        $Room->update($request->all());
+        return $Room;
     }
 
     /**
@@ -66,17 +66,17 @@ class ReadingController extends Controller
      */
     public function destroy($id)
     {
-        return Reading::destroy($id);
+        return Room::destroy($id);
     }
 
     /**
-     * Search for Reading by datetime TODO
+     * Search for Room by datetime TODO
      *
      * @param  str $name
      * @return \Illuminate\Http\Response
      */
     // public function search($name)
     // {
-    //     return Reading::where('name', 'like', '%'.$name.'%')->get();
+    //     return Room::where('name', 'like', '%'.$name.'%')->get();
     // }
 }

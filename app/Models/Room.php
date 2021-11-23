@@ -5,20 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Reading extends Model
+class Room extends Model
 {
     use HasFactory;
     protected $fillable = [
-		'data',
-        'device_id',
+		'name',
+        'slug',
+		'location',
 	];
 
-	protected $casts = [
-        'data' => 'array'
-    ];
-
-    public function room()
+    public function devices()
     {
-        return $this->belongsTo(Device::class);
+        return $this->hasMany(Device::class);
+
     }
 }

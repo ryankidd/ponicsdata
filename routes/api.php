@@ -54,16 +54,16 @@ Route::delete('/readings/{id}', [ReadingController::class, 'destroy']);
  * -------------------------------------------------- ***
  */
 
-
-// TODO: TEST.  Not sure if this is the proper implementation for multiple middleware.
-// Route::group(['middleware' => ['auth:sanctum', 'request.logging']], function () {
-//    Add routes that need auth here when we have sensors capable of sending auth headers.
-// });
-
 // If not, we can add routes here to have them log request data.
-// Route::group(['middleware' => ['auth:sanctum']], function () {
-
-// });
+// Route::group(['middleware' => ['auth:sanctum', 'request.logging']], function () {
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    // Rooms.
+    Route::get('/rooms', [RoomController::class, 'index']);
+    Route::get('/rooms/{id}', [RoomController::class, 'show']);
+    Route::post('/rooms', [RoomController::class, 'store']);
+    Route::put('/rooms/{id}', [RoomController::class, 'update']);
+    Route::delete('/rooms/{id}', [RoomController::class, 'destroy']);
+});
 
 Route::group(['middleware' => ['request.logging']], function () {
     Route::post('/readings', [ReadingController::class, 'store']);
