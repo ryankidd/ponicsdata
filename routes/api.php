@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\DeviceController;
-use App\Http\Controllers\WebhookController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ReadingController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
@@ -55,8 +55,7 @@ Route::delete('/readings/{id}', [ReadingController::class, 'destroy']);
  */
 
 // If not, we can add routes here to have them log request data.
-// Route::group(['middleware' => ['auth:sanctum', 'request.logging']], function () {
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'request.logging']], function () {
     // Rooms.
     Route::get('/rooms', [RoomController::class, 'index']);
     Route::get('/rooms/{id}', [RoomController::class, 'show']);

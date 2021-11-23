@@ -14,12 +14,18 @@ class CreateReadingsTable extends Migration
     public function up()
     {
         Schema::create('readings', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedInteger('device_id');
+            $table->engine = 'InnoDB';
+            $table->id()->unsignedBigInteger();
             $table->json('data');
+            $table->unsignedBigInteger('device_id');
             $table->timestamps();
+            $table->index(['id', 'device_id']);
+        });
 
-            $table->index(['device_id']);
+        Schema::table('readings', function($table) {
+            $table->foreign('device_id')
+                ->references('id')
+                ->on('devices');
         });
     }
 

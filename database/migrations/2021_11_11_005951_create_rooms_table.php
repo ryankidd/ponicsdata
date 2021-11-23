@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeviceReadingsTable extends Migration
+class CreateRoomsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateDeviceReadingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('device_readings', function (Blueprint $table) {
-            $table->foreignId('device_id')->constrained();
-            $table->foreignId('reading_id')->constrained();
+        Schema::create('rooms', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->id()->unsignedBigInteger();
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->string('location');
             $table->timestamps();
+            $table->index(['id', 'slug']);
         });
     }
 
@@ -27,6 +31,6 @@ class CreateDeviceReadingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('device_readings');
+        Schema::dropIfExists('rooms');
     }
 }

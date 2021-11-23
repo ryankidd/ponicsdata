@@ -27,7 +27,7 @@ class ReadingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'device' => 'required',
+            'device_id' => 'required',
             'data' => 'required'
         ]);
         return Reading::create($request->all());

@@ -14,14 +14,20 @@ class CreateDevicesTable extends Migration
     public function up()
     {
         Schema::create('devices', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsignedBigInteger();
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('description')->nullable();
-            $table->unsignedInteger('room_id')->default(NULL);
-            $table->timestamps();
+            $table->unsignedBigInteger('room_id');
 
-            $table->index(['room_id', 'slug']);
+            $table->timestamps();
+            $table->index(['id', 'room_id']);
+        });
+
+        Schema::table('devices', function($table) {
+            $table->foreign('room_id')
+                ->references('id')
+                ->on('rooms');
         });
     }
 
